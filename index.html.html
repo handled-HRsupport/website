@@ -1,0 +1,784 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>HANDLED</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    /* Layout: sticky nav, split hero, alternating paper/surface bands, one dark contact band */
+  :root{
+    --paper:#F6F8FB; --surface:#FFFFFF; --line:#DCE3EE;
+    --ink:#101826; --ink-soft:#4C5B72; --ink-faint:#7C8AA0;
+    --head:#0A1B33; --blue:#2F5DA8; --blue-bright:#3E72C6; --blue-soft:#6D9CE0;
+    --btn:#0A1B33; --btn-hover:#2F5DA8; --icon-bg:#0A1B33;
+    --panel:#0A1B33; --panel-kicker:#9DB8E5; --on-dark:#FFFFFF;
+    --header-bg:rgba(246,248,251,0.86); --frame-a:rgba(29,62,110,0.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0B1422; --surface:#111D31; --line:#22324C;
+      --ink:#E7EDF6; --ink-soft:#A8B7CD; --ink-faint:#7D8CA5;
+      --head:#F0F4FA; --blue:#86AAE8; --blue-bright:#3E72C6; --blue-soft:#4A6FA8;
+      --btn:#2F5DA8; --btn-hover:#3E72C6; --icon-bg:#1D3E6E;
+      --panel:#0F2342; --panel-kicker:#9DB8E5; --on-dark:#FFFFFF;
+      --header-bg:rgba(11,20,34,0.86); --frame-a:rgba(134,170,232,0.07);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0B1422; --surface:#111D31; --line:#22324C;
+    --ink:#E7EDF6; --ink-soft:#A8B7CD; --ink-faint:#7D8CA5;
+    --head:#F0F4FA; --blue:#86AAE8; --blue-bright:#3E72C6; --blue-soft:#4A6FA8;
+    --btn:#2F5DA8; --btn-hover:#3E72C6; --icon-bg:#1D3E6E;
+    --panel:#0F2342; --panel-kicker:#9DB8E5; --on-dark:#FFFFFF;
+    --header-bg:rgba(11,20,34,0.86); --frame-a:rgba(134,170,232,0.07);
+    color-scheme:dark;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:84px;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{max-width:100%;display:block;}
+  h1,h2,h3{
+    font-family:'Source Serif 4',serif;
+    font-weight:600;
+    line-height:1.12;
+    margin:0;
+    color:var(--head);
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1160px;margin:0 auto;padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px));}
+  section{position:relative;}
+  .kicker{display:block;font-size:13px;font-weight:600;color:var(--blue);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+    background:var(--header-bg);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:1160px;margin:0 auto;padding-block:18px;padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px));
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:8px;
+    background:var(--icon-bg);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .brand-mark svg{width:18px;height:18px;}
+  .brand-word{
+    font-family:'Source Serif 4',serif;
+    font-size:19px;font-weight:600;color:var(--head);
+    letter-spacing:0.01em;
+  }
+  nav.links{display:flex;gap:30px;align-items:center;}
+  nav.links a{
+    font-size:14.5px;font-weight:500;color:var(--ink-soft);
+    transition:color .18s ease;
+  }
+  nav.links a:hover{color:var(--head);}
+  .nav-cta{
+    display:inline-flex;align-items:center;
+    background:var(--btn);color:var(--on-dark)!important;
+    padding:10px 20px;border-radius:6px;
+    font-size:14px;font-weight:600;
+    transition:background .18s ease;
+  }
+  .nav-cta:hover{background:var(--btn-hover);}
+  .menu-btn{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .menu-btn span{display:block;width:22px;height:2px;background:var(--head);margin:5px 0;transition:.2s;}
+  .mobile-panel{display:none;flex-direction:column;gap:2px;padding-block:0 20px;padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px));}
+  .mobile-panel a{
+    padding:12px 0;border-bottom:1px solid var(--line);
+    font-size:15px;font-weight:500;color:var(--head);
+  }
+  header.open .mobile-panel{display:flex;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 96px;overflow:hidden;}
+  .hero .wrap{
+    display:grid;grid-template-columns:1.05fr 0.85fr;gap:56px;align-items:center;
+  }
+  .eyebrow-line{display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow-line .dash{width:26px;height:2px;background:var(--blue);}
+  .eyebrow-line span{font-size:13px;font-weight:600;color:var(--ink-soft);letter-spacing:0.02em;}
+  .hero h1{font-size:clamp(34px,4.4vw,54px);max-width:640px;}
+  .hero .sub{margin-top:22px;font-size:19px;color:var(--ink-soft);max-width:480px;line-height:1.55;}
+  .hero .tagline{margin-top:14px;font-size:15.5px;color:var(--blue);font-style:italic;font-family:'Source Serif 4',serif;}
+  .hero-cta-row{margin-top:36px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--btn);color:var(--on-dark);
+    padding:15px 30px;border-radius:6px;font-weight:600;font-size:15px;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:background .2s ease, transform .2s ease;
+    border:1px solid var(--btn);
+  }
+  .btn-primary:hover{background:var(--btn-hover);border-color:var(--btn-hover);transform:translateY(-1px);}
+  .btn-ghost{
+    padding:15px 26px;border-radius:6px;font-weight:600;font-size:15px;
+    border:1px solid var(--line);color:var(--head);
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--blue);background:var(--surface);}
+
+  .hero-visual{position:relative;}
+  .task-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:16px 18px;
+    display:flex;align-items:center;gap:14px;
+    box-shadow:0 1px 2px rgba(10,27,51,0.04);
+    margin-bottom:12px;
+  }
+  .task-card .tick{
+    width:24px;height:24px;border-radius:50%;
+    border:1.5px solid var(--line);
+    flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .task-card .tick svg{width:13px;height:13px;opacity:0;}
+  .task-card span.label{font-size:14.5px;color:var(--ink-soft);font-weight:500;}
+  .task-card.done .tick{background:var(--btn);border-color:var(--btn);}
+  .task-card.done .tick svg{opacity:1;}
+  .task-card.done span.label{color:var(--head);}
+  .visual-frame{
+    position:relative;padding:26px;
+    background:linear-gradient(180deg,var(--frame-a),transparent);
+    border-radius:16px;
+  }
+  .visual-label{display:flex;justify-content:flex-start;align-items:center;margin-bottom:16px;padding:0 2px;}
+  .visual-label span{font-size:12.5px;font-weight:600;color:var(--ink-faint);letter-spacing:0.02em;}
+
+  /* ---------- SECTION HEADS ---------- */
+  .section-head{max-width:640px;margin-bottom:52px;}
+  .section-head .kicker{margin-bottom:12px;}
+  .section-head h2{font-size:clamp(26px,3vw,36px);}
+  .section-head p{margin-top:14px;color:var(--ink-soft);font-size:16.5px;}
+
+  section.alt{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  section .wrap{padding-top:96px;padding-bottom:96px;}
+  #who{border-top:1px solid var(--line);}
+
+  /* ---------- SERVICES ---------- */
+  .service-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  }
+  .service-card{background:var(--surface);padding:32px 28px;transition:background .2s ease;}
+  .service-card:hover{background:var(--paper);}
+  .service-icon{
+    width:42px;height:42px;border-radius:8px;
+    background:var(--icon-bg);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:20px;
+  }
+  .service-icon svg{width:20px;height:20px;stroke:var(--on-dark);}
+  .service-card h3{font-family:'Inter',sans-serif;font-size:16.5px;font-weight:600;color:var(--head);margin-bottom:8px;}
+  .service-card p{font-size:14.5px;color:var(--ink-soft);line-height:1.55;}
+
+  /* ---------- SAMPLE WORK ---------- */
+  .sample-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .sample-card{
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:34px 28px 28px;
+    background:var(--surface);
+    display:flex;flex-direction:column;
+    transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .sample-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--blue);
+    box-shadow:0 10px 28px rgba(16,35,63,0.08);
+  }
+  .sample-number{font-family:'Source Serif 4',serif;font-size:18px;font-weight:700;color:var(--blue);margin-bottom:18px;}
+  .sample-category{font-size:12px;font-weight:700;letter-spacing:0.5px;color:var(--ink-faint);margin-bottom:12px;text-transform:uppercase;}
+  .sample-card h3{font-size:19px;line-height:1.35;margin-bottom:12px;}
+  .sample-card > p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);margin-bottom:20px;}
+  .sample-checklist{list-style:none;padding:0;margin:0 0 24px;}
+  .sample-checklist li{
+    position:relative;padding-left:26px;margin-bottom:10px;
+    font-size:13.5px;line-height:1.45;color:var(--ink-soft);
+  }
+  .sample-checklist li::before{
+    content:"✓";position:absolute;left:0;top:1px;
+    width:15px;height:15px;border:1px solid var(--blue-soft);border-radius:50%;
+    color:var(--blue);font-size:9px;line-height:14px;text-align:center;
+  }
+  .sample-button{
+    margin-top:auto;align-self:flex-start;
+    display:inline-flex;align-items:center;gap:9px;
+    padding:10px 17px;border:1px solid var(--line);border-radius:6px;
+    background:var(--surface);color:var(--head);
+    font-size:13.5px;font-weight:700;
+    transition:all .2s ease;
+  }
+  .sample-button:hover{background:var(--btn);border-color:var(--btn);color:var(--on-dark);}
+  .sample-disclaimer{
+    margin:30px auto 0;text-align:center;
+    font-size:12.5px;line-height:1.6;font-style:italic;color:var(--ink-faint);
+  }
+  .sample-cta{margin-top:48px;border-top:1px solid var(--line);padding-top:42px;text-align:center;}
+  .sample-cta h3{font-size:25px;margin-bottom:10px;}
+  .sample-cta p{margin-bottom:24px;color:var(--ink-soft);font-size:15px;}
+
+  /* ---------- WHO WE HELP ---------- */
+  .help-layout{display:grid;grid-template-columns:0.9fr 1.1fr;gap:64px;align-items:start;}
+  .help-copy p{color:var(--ink-soft);font-size:17px;line-height:1.7;}
+  .help-copy p+p{margin-top:16px;}
+  .tag-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
+  .tag-pill{
+    border:1px solid var(--line);padding:8px 16px;border-radius:20px;
+    font-size:13.5px;font-weight:500;color:var(--head);background:var(--surface);
+  }
+  .profile-list{display:flex;flex-direction:column;}
+  .profile-item{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--line);}
+  .profile-item:first-child{padding-top:0;}
+  .profile-num{font-family:'Source Serif 4',serif;font-size:15px;color:var(--blue);font-weight:600;flex-shrink:0;width:28px;}
+  .profile-item h3{font-family:'Inter',sans-serif;font-size:15.5px;font-weight:600;color:var(--head);margin-bottom:5px;}
+  .profile-item p{font-size:14.5px;color:var(--ink-soft);}
+
+  /* ---------- WHY HANDLED ---------- */
+  .why-grid{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);margin-top:52px;}
+  .why-item{padding:30px 22px 30px 0;border-bottom:1px solid var(--line);}
+  .why-item:not(:last-child){border-right:1px solid var(--line);padding-right:22px;}
+  .why-item:not(:first-child){padding-left:22px;}
+  .why-num{font-family:'Source Serif 4',serif;font-size:22px;color:var(--blue);margin-bottom:14px;display:block;}
+  .why-item h3{font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:var(--head);margin-bottom:8px;line-height:1.35;}
+  .why-item p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);position:relative;}
+  .step{position:relative;padding:0 32px 0 0;}
+  .step:not(:last-child)::after{
+    content:'';position:absolute;top:23px;right:-4px;width:calc(100% - 30px);height:1px;
+    background:repeating-linear-gradient(to right,var(--line) 0 6px,transparent 6px 12px);
+    display:none;
+  }
+  @media(min-width:1001px){ .step:not(:last-child)::after{display:block;} }
+  .step-index{
+    width:46px;height:46px;border-radius:50%;
+    border:1.5px solid var(--head);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:var(--head);
+    background:var(--paper);position:relative;z-index:1;
+    margin-bottom:22px;
+  }
+  .step h3{font-size:18px;margin-bottom:10px;}
+  .step p{font-size:14.5px;color:var(--ink-soft);line-height:1.6;max-width:280px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+  .about-copy p{font-size:17px;color:var(--ink-soft);line-height:1.75;}
+  .about-copy p+p{margin-top:16px;}
+  .about-panel{background:var(--panel);border-radius:14px;padding:40px;color:var(--on-dark);}
+  .about-panel .stat{padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.14);}
+  .about-panel .stat:first-child{padding-top:0;}
+  .about-panel .stat:last-child{border-bottom:none;padding-bottom:0;}
+  .about-panel .stat strong{display:block;font-family:'Source Serif 4',serif;font-size:20px;font-weight:600;margin-bottom:4px;}
+  .about-panel .stat span{font-size:13.5px;color:rgba(255,255,255,0.7);}
+
+  /* ---------- CONTACT ---------- */
+  .contact-band{background:var(--panel);color:var(--on-dark);}
+  .contact-inner{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  .contact-band h2{color:var(--on-dark);font-size:clamp(26px,3.2vw,38px);max-width:460px;}
+  .contact-band .sub{margin-top:16px;color:rgba(255,255,255,0.68);font-size:16px;max-width:420px;}
+  .contact-card{
+    background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);
+    border-radius:12px;padding:32px;
+  }
+  .contact-row{display:flex;align-items:center;gap:14px;padding:16px 0;}
+  .contact-row .icon{
+    width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.1);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .contact-row .icon svg{width:16px;height:16px;stroke:var(--on-dark);}
+  .contact-row .meta span{display:block;font-size:12px;color:rgba(255,255,255,0.55);margin-bottom:2px;}
+  .contact-row .meta a{font-size:14.5px;font-weight:600;word-break:break-all;}
+  .contact-row .meta a:hover{text-decoration:underline;}
+  .contact-band .btn-primary{
+    margin-top:12px;width:100%;justify-content:center;
+    background:var(--blue-bright);border-color:var(--blue-bright);
+  }
+  .contact-band .btn-primary:hover{background:var(--surface);color:var(--head);border-color:var(--surface);}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:32px 0;border-top:1px solid var(--line);}
+  footer .wrap{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+    padding-top:0;padding-bottom:0;
+  }
+  footer .foot-brand{font-family:'Source Serif 4',serif;font-size:15px;color:var(--head);font-weight:600;}
+  footer .foot-note{font-size:13px;color:var(--ink-faint);}
+
+  /* ---------- REVEAL ---------- */
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:1000px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-visual{order:-1;max-width:420px;}
+    .service-grid{grid-template-columns:repeat(2,1fr);}
+    .help-layout,.about-layout,.contact-inner{grid-template-columns:1fr;gap:36px;}
+    .why-grid{grid-template-columns:repeat(3,1fr);}
+    .why-item{border-right:1px solid var(--line)!important;padding-left:22px!important;padding-right:22px!important;}
+    .why-item:nth-child(3n+1){padding-left:0!important;}
+    .why-item:nth-child(3n){border-right:none!important;}
+    .why-item:last-child{border-right:none!important;}
+    .steps{grid-template-columns:1fr;gap:36px;}
+  }
+  @media (max-width:800px){
+    nav.links{display:none;}
+    .nav-cta{display:none;}
+    .menu-btn{display:block;}
+    .service-grid{grid-template-columns:1fr;}
+    .sample-grid{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .why-item{padding-left:22px!important;padding-right:22px!important;border-right:1px solid var(--line)!important;}
+    .why-item:nth-child(odd){padding-left:0!important;}
+    .why-item:nth-child(even){border-right:none!important;}
+  }
+  @media (max-width:560px){
+    .wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));}
+    .nav{padding-block:16px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));}
+    .mobile-panel{padding-block:0 20px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));}
+    section .wrap{padding-top:64px;padding-bottom:64px;}
+    .hero{padding:56px 0 64px;}
+    .sample-card{padding:28px 22px 24px;}
+    .why-grid{grid-template-columns:1fr;}
+    .why-item{border-right:none!important;padding-left:0!important;padding-right:0!important;}
+  }
+
+  .contact-row .meta #emailText{font-size:14.5px;font-weight:600;word-break:break-all;user-select:all;}
+  .copy-btn{
+    margin-left:auto;flex-shrink:0;cursor:pointer;
+    background:transparent;color:var(--on-dark);
+    border:1px solid rgba(255,255,255,0.28);border-radius:6px;
+    padding:7px 14px;font:600 13px 'Inter',sans-serif;
+    transition:background .2s ease;
+  }
+  .copy-btn:hover{background:rgba(255,255,255,0.12);}
+  :focus-visible{outline:2px solid var(--blue-bright);outline-offset:2px;}
+</style>
+<header id="siteHeader">
+  <div class="nav">
+    <a href="#top" class="brand" aria-label="HANDLED home">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5L9.5 17L19 7" stroke="#F6F8FB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <span class="brand-word">HANDLED</span>
+    </a>
+    <nav class="links">
+      <a href="#services">What We Handle</a>
+      <a href="#samples">Sample Work</a>
+      <a href="#who">Who We Help</a>
+      <a href="#why">Why HANDLED</a>
+      <a href="#how">How It Works</a>
+      <a href="#about">About</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#services">What We Handle</a>
+    <a href="#samples">Sample Work</a>
+    <a href="#who">Who We Help</a>
+    <a href="#why">Why HANDLED</a>
+    <a href="#how">How It Works</a>
+    <a href="#about">About</a>
+    <a href="#contact">Let's Talk</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow-line"><span class="dash"></span><span>Remote HR Operations &amp; Team Support</span></div>
+      <h1>Your team grows.<br>The work behind it gets handled.</h1>
+      <p class="sub">Remote HR operations and team support for growing startups.</p>
+      <p class="tagline">"The work behind your team, handled."</p>
+      <div class="hero-cta-row">
+        <a href="#contact" class="btn-primary">Let's Talk
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#services" class="btn-ghost">See what we handle</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="visual-frame">
+        <div class="visual-label"><span>A GLIMPSE OF WHAT WE HANDLE</span></div>
+        <div class="task-card done"><div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">New hire onboarding</span></div>
+        <div class="task-card done"><div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Employee documentation</span></div>
+        <div class="task-card done"><div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Payroll coordination</span></div>
+        <div class="task-card done"><div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">HR tracker management</span></div>
+        <div class="task-card done"><div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Joining &amp; exit coordination</span></div>
+        <div class="task-card done"><div class="tick"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5L9.5 17L19 7" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="label">Employee feedback</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE HANDLE -->
+<section id="services" class="alt">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <span class="kicker">What We Handle</span>
+      <h2>The HR administrative work every growing team needs</h2>
+      <p>Practical, hands-on support across the day-to-day HR operations that keep a growing team organized.</p>
+    </div>
+    <div class="service-grid">
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20c0-3.6 2.9-6.2 6.5-6.2s6.5 2.6 6.5 6.2"/></svg></div>
+        <h3>Employee Onboarding</h3>
+        <p>Structured onboarding so every new hire starts with clarity, on time, every time.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h8l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h6M10 17h6"/></svg></div>
+        <h3>HR Documentation</h3>
+        <p>Offer letters, policies and employment documents, prepared and kept consistent.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M9 4v16"/></svg></div>
+        <h3>Employee Records &amp; HR Trackers</h3>
+        <p>Centralized, up-to-date records and trackers your team can actually rely on.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M8 14h3"/></svg></div>
+        <h3>Payroll Support</h3>
+        <p>Payroll data prepared and coordinated on schedule, ready for your payroll process.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6M7 6l5-3 5 3M6 21V10M18 21V10M3 21h18"/></svg></div>
+        <h3>Joining &amp; Exit Coordination</h3>
+        <p>Smooth, well-documented joining and exit coordination, with clear checklists and follow-ups.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Full &amp; Final Settlement Support</h3>
+        <p>Organized support for Full &amp; Final Settlement documentation and coordination.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M12 19V5M20 19v-7"/></svg></div>
+        <h3>Basic HR Reporting</h3>
+        <p>Clear, simple reports that give founders visibility into their team's HR data.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-8.4 8.4 8.3 8.3 0 01-4-1L3 20l1.2-3.6a8.3 8.3 0 01-1-4A8.4 8.4 0 0111.6 4a8.4 8.4 0 019.4 7.5z"/></svg></div>
+        <h3>Employee Feedback &amp; Surveys</h3>
+        <p>Simple surveys and feedback cycles that help you stay close to your team.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l1 4H8l1-4z"/><path d="M6 7h12l-1 14H7L6 7z"/><path d="M10 11h4"/></svg></div>
+        <h3>HR Process Documentation &amp; Checklists</h3>
+        <p>Written-down, repeatable processes so HR operations don't live in one person's head.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE WORK -->
+<section id="samples">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <span class="kicker">Sample Work</span>
+      <h2>A look at how HANDLED organizes everyday HR operations</h2>
+      <p>Explore examples of the HR operations systems and documents HANDLED can build and manage for growing teams.</p>
+    </div>
+
+    <div class="sample-grid">
+
+      <div class="sample-card">
+        <div class="sample-number">01</div>
+        <div class="sample-category">Onboarding</div>
+        <h3>Employee Onboarding Operations System</h3>
+        <p>A structured onboarding workflow designed to keep new-joiner activities, ownership, timelines, and follow-ups organized.</p>
+        <ul class="sample-checklist">
+          <li>Pre-joining checklist</li>
+          <li>Day 1 activities</li>
+          <li>Week 1 follow-up</li>
+          <li>30-day follow-up</li>
+          <li>Ownership and status tracking</li>
+        </ul>
+        <a href="https://drive.google.com/drive/folders/1Ihcsya3N7Ibs-Mu8Qnk099x_ev5YjH1z?usp=sharing" target="_blank" rel="noopener" class="sample-button">View Sample <span>→</span></a>
+      </div>
+
+      <div class="sample-card">
+        <div class="sample-number">02</div>
+        <div class="sample-category">HR Documentation</div>
+        <h3>Employee Documentation Management Tracker</h3>
+        <p>A practical tracker for monitoring employee documents, completion status, verification, and pending follow-ups.</p>
+        <ul class="sample-checklist">
+          <li>Employee document tracking</li>
+          <li>Required vs received documents</li>
+          <li>Verification status</li>
+          <li>Pending follow-ups</li>
+          <li>Completion overview</li>
+        </ul>
+        <a href="https://drive.google.com/drive/folders/1Z0Adk6mawLfrwgnVqzx4lL8uqeBQYmsv?usp=sharing" target="_blank" rel="noopener" class="sample-button">View Sample <span>→</span></a>
+      </div>
+
+      <div class="sample-card">
+        <div class="sample-number">03</div>
+        <div class="sample-category">HR Data &amp; Records</div>
+        <h3>HR Employee Master Tracker</h3>
+        <p>A structured employee information tracker designed to keep core HR data organized and easy to maintain.</p>
+        <ul class="sample-checklist">
+          <li>Employee information</li>
+          <li>Department and manager</li>
+          <li>Employment status</li>
+          <li>Joining and probation tracking</li>
+          <li>Basic HR dashboard</li>
+        </ul>
+        <a href="https://drive.google.com/drive/folders/1l1gwduqZFnBv4P9WpSlZgmzn1Th9HhJZ?usp=sharing" target="_blank" rel="noopener" class="sample-button">View Sample <span>→</span></a>
+      </div>
+
+      <div class="sample-card">
+        <div class="sample-number">04</div>
+        <div class="sample-category">Employee Experience</div>
+        <h3>Employee Onboarding Feedback &amp; Insights</h3>
+        <p>A sample feedback workflow showing how employee responses can be collected, organized, summarized, and converted into follow-up actions.</p>
+        <ul class="sample-checklist">
+          <li>Feedback questions</li>
+          <li>Response summary</li>
+          <li>Key themes</li>
+          <li>Action tracker</li>
+          <li>HR operations insights</li>
+        </ul>
+        <a href="https://drive.google.com/drive/folders/1pmwVmWka6DkAVLhd_4N1FfOOPFgCmTbQ?usp=sharing" target="_blank" rel="noopener" class="sample-button">View Sample <span>→</span></a>
+      </div>
+
+    </div>
+
+    <p class="sample-disclaimer">Sample materials use fictional information and are provided to demonstrate workflow structure and HR operations support.</p>
+
+    <div class="sample-cta">
+      <h3>Need something similar for your team?</h3>
+      <p>Let's organize the HR work behind your growing team.</p>
+      <a href="#contact" class="btn-primary">Discuss Your HR Needs →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE HELP -->
+<section id="who">
+  <div class="wrap reveal">
+    <div class="help-layout">
+      <div class="help-copy">
+        <span class="kicker">Who We Help</span>
+        <h2 style="margin-top:12px;margin-bottom:20px;font-size:clamp(24px,2.8vw,32px);">Built for early-stage startups and small growing teams</h2>
+        <p>HANDLED works with founders and operators who are scaling fast but aren't ready — or don't yet need — to hire a full-time HR operations person.</p>
+        <p>We step in as the organized, reliable layer behind the team, so HR administration keeps pace with your growth instead of falling behind it.</p>
+        <div class="tag-row">
+          <span class="tag-pill">SaaS &amp; AI</span>
+          <span class="tag-pill">Technology</span>
+          <span class="tag-pill">Agencies</span>
+          <span class="tag-pill">E-commerce</span>
+          <span class="tag-pill">Remote-first companies</span>
+        </div>
+      </div>
+      <div class="profile-list">
+        <div class="profile-item">
+          <span class="profile-num">01</span>
+          <div><h3>Early-stage startups</h3><p>Post-fundraise teams hiring quickly, with no HR operations in place yet.</p></div>
+        </div>
+        <div class="profile-item">
+          <span class="profile-num">02</span>
+          <div><h3>Small, growing companies</h3><p>Teams of 5–50 where HR admin is currently handled ad-hoc by a founder or ops lead.</p></div>
+        </div>
+        <div class="profile-item">
+          <span class="profile-num">03</span>
+          <div><h3>Remote and distributed teams</h3><p>Companies that need dependable coordination without an in-house HR hire.</p></div>
+        </div>
+        <div class="profile-item">
+          <span class="profile-num">04</span>
+          <div><h3>Founders who need it off their plate</h3><p>Leaders who want HR operations organized and running quietly in the background.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY HANDLED -->
+<section id="why" class="alt">
+  <div class="wrap reveal">
+    <div class="section-head" style="margin-bottom:0;">
+      <span class="kicker">Why HANDLED</span>
+      <h2>A practical layer of HR operations, not a big commitment</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <span class="why-num">01</span>
+        <h3>Practical support</h3>
+        <p>Hands-on help with the real, day-to-day HR admin work — not theory or strategy decks.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-num">02</span>
+        <h3>Organized HR operations</h3>
+        <p>Records, trackers and processes that are consistent, current and easy to hand over.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-num">03</span>
+        <h3>Flexible, project-based support</h3>
+        <p>Scoped to what you need now, without the commitment of a full-time hire.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-num">04</span>
+        <h3>Remote collaboration</h3>
+        <p>Built to work smoothly with distributed founders and teams, wherever they are.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-num">05</span>
+        <h3>Clear documentation</h3>
+        <p>Every process is written down, so nothing depends on tribal knowledge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <span class="kicker">How It Works</span>
+      <h2>A simple, three-step way to get started</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-index">1</div>
+        <h3>Tell us what you need</h3>
+        <p>Share where your HR operations currently stand and what's falling behind.</p>
+      </div>
+      <div class="step">
+        <div class="step-index">2</div>
+        <h3>We organize the work</h3>
+        <p>We set up the records, documentation and processes to bring order to your HR admin.</p>
+      </div>
+      <div class="step">
+        <div class="step-index">3</div>
+        <h3>Your HR operations stay on track</h3>
+        <p>We keep things running, updated and organized as your team continues to grow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="alt">
+  <div class="wrap reveal">
+    <div class="about-layout">
+      <div class="about-copy">
+        <span class="kicker">About HANDLED</span>
+        <h2 style="margin-top:12px;margin-bottom:18px;font-size:clamp(24px,2.8vw,32px);">Practical HR operations support, built for startups</h2>
+        <p>HANDLED provides remote HR operations and team support to early-stage startups and small growing companies. We take on the administrative HR work — onboarding, documentation, records, payroll support and process management — so founders and operators don't have to.</p>
+        <p>We're a practical alternative to hiring a full-time HR operations person before you need one: organized, reliable support that scales with your team.</p>
+      </div>
+      <div class="about-panel">
+        <div class="stat"><strong>Startups &amp; growing teams</strong><span>Our primary focus</span></div>
+        <div class="stat"><strong>Project-based engagements</strong><span>Scoped to what you need, when you need it</span></div>
+        <div class="stat"><strong>Fully remote</strong><span>Built for distributed teams and founders</span></div>
+        <div class="stat"><strong>Documentation-first</strong><span>Processes your team can rely on and hand over</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-band">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div>
+        <span class="kicker" style="color:var(--panel-kicker);">Contact</span>
+        <h2 style="margin-top:12px;">Tell us what needs handling.</h2>
+        <p class="sub">Need help getting your HR operations organized? Let's start with a conversation.</p>
+      </div>
+      <div class="contact-card">
+        <div style="margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,0.12);">
+          <h3 style="font-family:'Source Serif 4',serif;font-weight:600;font-size:19px;color:var(--on-dark);margin-bottom:8px;">Let's get your HR operations handled.</h3>
+          <p style="font-size:14px;color:rgba(255,255,255,0.68);line-height:1.55;">Tell us where things stand today, and we'll help you identify what needs organizing first.</p>
+        </div>
+        <div class="contact-row">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+          <div class="meta"><span>Email</span><span id="emailText">handled612@gmail.com</span></div>
+          <button type="button" class="copy-btn" id="copyEmail">Copy</button>
+        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdGQ_plZ75jwVSqdMQBMw0NLifLXq7f3nYP5TXw-mzd1b_Pag/viewform?usp=sharing&amp;ouid=115428522051297417506" target="_blank" rel="noopener" class="btn-primary">
+          Start a Conversation
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="foot-brand">HANDLED</span>
+    <span class="foot-note">© 2026 HANDLED. Remote HR Operations &amp; Team Support.</span>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  var menuBtn = document.getElementById('menuBtn');
+  var header = document.getElementById('siteHeader');
+  menuBtn.addEventListener('click', function () {
+    var open = header.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('.mobile-panel a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      header.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Copy email
+  var copyBtn = document.getElementById('copyEmail');
+  var emailEl = document.getElementById('emailText');
+  copyBtn.addEventListener('click', function () {
+    var done = function () { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy'; }, 1800); };
+    var select = function () {
+      var r = document.createRange(); r.selectNodeContents(emailEl);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    };
+    try {
+      navigator.clipboard.writeText(emailEl.textContent.trim()).then(done, select);
+    } catch (e) { select(); }
+  });
+</script>
+
+</body></html>
